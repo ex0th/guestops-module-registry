@@ -1,0 +1,43 @@
+{
+  "key": "shift_handover",
+  "name": "Schichtübergabe",
+  "version": "0.1.0",
+  "description": "Digitale Schichtübergabe mit Checklisten, Pflichtpunkten, Fotos, Unterschriften und PDF-Export.",
+  "author": "smilch",
+  "min_core_version": "0.1.0",
+  "scope": "site",
+  "capabilities": [
+    "shift_management",
+    "checklist",
+    "digital_signature",
+    "day_close"
+  ],
+  "deployment": {
+    "type": "compose",
+    "mode": "per_site",
+    "service_name_template": "shift-handover-site-{site_slug}",
+    "compose_file_template": "modules/shift_handover.compose.yml",
+    "healthcheck_path": "/health"
+  },
+  "routes": {
+    "frontend_template": "/sites/{site_slug}/modules/shift-handover",
+    "api_template": "/api/sites/{site_slug}/modules/shift-handover"
+  },
+  "permissions": [
+    "shift_handover.read",
+    "shift_handover.operate",
+    "shift_handover.sign",
+    "shift_handover.configure",
+    "shift_handover.export"
+  ],
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "require_photo_on_submit": {
+        "type": "boolean",
+        "default": false,
+        "description": "Mindestens ein Foto pro Übergabe beim Einreichen erforderlich"
+      }
+    }
+  }
+}
