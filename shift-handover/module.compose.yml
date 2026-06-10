@@ -1,23 +1,21 @@
 # Shift Handover – Module Compose
 # Wird vom Deployment-Agent pro aktivierter Site gestartet.
-# SERVICE_NAME = shift-handover-site-{site_slug}, gesetzt vom Agent.
+# Der Compose-Projektname (-p) ist SERVICE_NAME, container_name ebenfalls.
 
 services:
-  ${SERVICE_NAME}:
-    image: ghcr.io/ex0th/guestops-module-shift-handover:${MODULE_VERSION:-latest}
+  app:
+    image: ghcr.io/ex0th/guestops-module-shift-handover:latest
     container_name: ${SERVICE_NAME}
     restart: unless-stopped
     networks:
       - guestops-net
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      DATABASE_URL_ADMIN: ${DATABASE_URL_ADMIN}
+      DATABASE_URL_ADMIN: ${DATABASE_URL_ADMIN:-}
       SITE_ID: ${SITE_ID}
       SITE_SLUG: ${SITE_SLUG}
       GUESTOPS_CORE_URL: http://backend:8000
       GUESTOPS_AGENT_TOKEN: ${GUESTOPS_AGENT_TOKEN}
-      SECRET_KEY: ${SECRET_KEY}
-      MODULE_VERSION: ${MODULE_VERSION:-latest}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
