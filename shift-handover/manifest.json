@@ -1,7 +1,7 @@
 {
   "key": "shift_handover",
   "name": "Schichtübergabe",
-  "version": "0.1.0",
+  "version": "0.4.5",
   "description": "Digitale Schichtübergabe mit Checklisten, Pflichtpunkten, Fotos, Unterschriften und PDF-Export.",
   "author": "smilch",
   "min_core_version": "0.1.0",
