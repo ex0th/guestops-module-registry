@@ -26,4 +26,4 @@ services:
 networks:
   guestops-net:
     external: true
-    name: ${COMPOSE_PROJECT_NAME:-guestops}-net
+    name: ${GUESTOPS_NETWORK}
