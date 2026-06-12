@@ -1,0 +1,47 @@
+{
+  "key": "itdoc",
+  "name": "IT-Betriebsdokumentation",
+  "version": "0.1.0",
+  "description": "Digitales Betriebshandbuch für kleine Unternehmen: Standorte, Netzwerkgeräte, Internetanschlüsse, Domains, SaaS-Accounts, Ansprechpartner, Notfallplan und Wartungsverträge.",
+  "author": "smilch",
+  "min_core_version": "0.1.0",
+  "scope": "site",
+  "capabilities": [
+    "it_documentation",
+    "asset_management",
+    "expiry_tracking",
+    "emergency_plan"
+  ],
+  "deployment": {
+    "type": "compose",
+    "mode": "per_site",
+    "service_name_template": "itdoc-site-{site_slug}",
+    "compose_file_template": "modules/itdoc.compose.yml",
+    "healthcheck_path": "/health"
+  },
+  "routes": {
+    "frontend_template": "/sites/{site_slug}/modules/itdoc",
+    "api_template": "/api/sites/{site_slug}/modules/itdoc"
+  },
+  "permissions": [
+    "itdoc.read",
+    "itdoc.operate",
+    "itdoc.configure",
+    "itdoc.export"
+  ],
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "expiry_warning_days": {
+        "type": "integer",
+        "default": 30,
+        "description": "Tage vor Ablauf für Dashboard-Warnmeldung"
+      },
+      "company_name": {
+        "type": "string",
+        "default": "",
+        "description": "Firmenname für Dokumentenheader"
+      }
+    }
+  }
+}

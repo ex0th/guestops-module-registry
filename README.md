@@ -13,6 +13,7 @@ Container-Registry (ghcr.io/ex0th) und erfordern Authentifizierung.
 | Modul | Verzeichnis | Beschreibung |
 |-------|------------|-------------|
 | Schichtübergabe | `shift-handover/` | Digitale Schichtübergabe mit Checklisten, Unterschriften und PDF-Export |
+| IT-Betriebsdokumentation | `itdoc/` | Digitales Betriebshandbuch: Geräte, Domains, SaaS, Notfallplan, Wartungsverträge |
 
 ---
 
