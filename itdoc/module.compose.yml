@@ -3,7 +3,7 @@
 
 services:
   app:
-    image: ghcr.io/ex0th/guestops-module-itdoc:latest
+    image: ghcr.io/ex0th/guestops-module-itdoc:${MODULE_VERSION:-latest}
     container_name: ${SERVICE_NAME}
     restart: unless-stopped
     networks:
