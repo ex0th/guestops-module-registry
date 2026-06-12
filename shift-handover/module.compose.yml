@@ -23,7 +23,10 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/shift-handover`)"
       - "traefik.http.routers.${SERVICE_NAME}.priority=10"
       - "traefik.http.middlewares.${SERVICE_NAME}-strip.stripprefix.prefixes=/sites/${SITE_SLUG}/modules/shift-handover"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-strip"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.regex=^(https?://[^/]+/sites/${SITE_SLUG}/modules/shift-handover)$$"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.replacement=$${1}/"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.permanent=false"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-slash,${SERVICE_NAME}-strip"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
