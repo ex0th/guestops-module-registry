@@ -14,7 +14,7 @@
   "deployment": {
     "type": "compose",
     "mode": "per_site",
-    "service_name_template": "lost-found-site-{site_slug}",
+    "service_name_template": "{site_slug}-lost_found",
     "compose_file_template": "modules/lost_found.compose.yml",
     "healthcheck_path": "/health"
   },

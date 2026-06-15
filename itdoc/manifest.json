@@ -15,7 +15,7 @@
   "deployment": {
     "type": "compose",
     "mode": "per_site",
-    "service_name_template": "itdoc-site-{site_slug}",
+    "service_name_template": "{site_slug}-itdoc",
     "compose_file_template": "modules/itdoc.compose.yml",
     "healthcheck_path": "/health"
   },

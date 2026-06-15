@@ -1,8 +1,8 @@
 {
   "key": "shift_handover",
-  "name": "Schichtübergabe",
-  "version": "0.5.0",
-  "description": "Digitale Schichtübergabe mit Checklisten, Pflichtpunkten, Fotos, Unterschriften und PDF-Export.",
+  "name": "ShiftOps",
+  "version": "0.6.0",
+  "description": "Integriertes Schichtmodul: Schichtübergaben, Öffnungs- und Schließungslisten, operative Checklisten für alle Bereiche.",
   "author": "smilch",
   "min_core_version": "0.1.0",
   "scope": "site",
@@ -10,12 +10,15 @@
     "shift_management",
     "checklist",
     "digital_signature",
-    "day_close"
+    "day_close",
+    "opening_checklist",
+    "closing_checklist",
+    "operational_runs"
   ],
   "deployment": {
     "type": "compose",
     "mode": "per_site",
-    "service_name_template": "shift-handover-site-{site_slug}",
+    "service_name_template": "{site_slug}-shift_handover",
     "compose_file_template": "modules/shift_handover.compose.yml",
     "healthcheck_path": "/health"
   },
@@ -28,7 +31,13 @@
     "shift_handover.operate",
     "shift_handover.sign",
     "shift_handover.configure",
-    "shift_handover.export"
+    "shift_handover.export",
+    "shiftops.read",
+    "shiftops.operate",
+    "shiftops.sign",
+    "shiftops.review",
+    "shiftops.configure",
+    "shiftops.export"
   ],
   "config_schema": {
     "type": "object",
@@ -37,6 +46,21 @@
         "type": "boolean",
         "default": false,
         "description": "Mindestens ein Foto pro Übergabe beim Einreichen erforderlich"
+      },
+      "auto_start_run": {
+        "type": "boolean",
+        "default": true,
+        "description": "Öffnungs-/Schließungsliste automatisch auf 'in_progress' setzen wenn geöffnet"
+      },
+      "review_required": {
+        "type": "boolean",
+        "default": false,
+        "description": "Abgeschlossene Läufe müssen von einem Manager geprüft werden"
+      },
+      "default_area": {
+        "type": "string",
+        "default": "reception",
+        "description": "Standard-Bereich für neue Vorlagen"
       }
     }
   }
