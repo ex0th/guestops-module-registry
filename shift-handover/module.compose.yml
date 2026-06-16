@@ -18,7 +18,6 @@ services:
       SITE_SLUG: ${SITE_SLUG}
       GUESTOPS_CORE_URL: http://backend:8000
       GUESTOPS_AGENT_TOKEN: ${GUESTOPS_AGENT_TOKEN}
-      MODULE_VERSION: ${MODULE_VERSION:-latest}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/shift-handover`)"
