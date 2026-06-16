@@ -1,7 +1,7 @@
 {
   "key": "lost_found",
   "name": "Lost & Found",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Fundstückverwaltung für Hotels, Events und Gastro. Foto-Erfassung, QR-Etiketten, Gast-Verlustmeldungen, DSGVO-konforme Aufbewahrungsfristen.",
   "author": "smilch",
   "min_core_version": "0.1.0",
@@ -14,7 +14,7 @@
   "deployment": {
     "type": "compose",
     "mode": "per_site",
-    "service_name_template": "{site_slug}-lost_found",
+    "service_name_template": "lost-found-site-{site_slug}",
     "compose_file_template": "modules/lost_found.compose.yml",
     "healthcheck_path": "/health"
   },
