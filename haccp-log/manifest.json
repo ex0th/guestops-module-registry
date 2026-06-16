@@ -1,7 +1,7 @@
 {
   "key": "haccp_log",
   "name": "HACCP Log",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Vollständiges HACCP-Compliance-Modul: Temperatur-, Hygiene- und Lebensmittelsicherheitsprotokolle. Flexible Vorlagen, Grenzwertüberwachung, Korrektivmaßnahmen, Audit-Trail und Export.",
   "author": "smilch",
   "min_core_version": "0.1.0",
@@ -29,10 +29,22 @@
   "config_schema": {
     "type": "object",
     "properties": {
-      "entry_reminder_enabled": {"type": "boolean", "default": false},
-      "entry_interval_hours": {"type": "integer", "default": 4},
-      "critical_notification_enabled": {"type": "boolean", "default": true},
-      "auto_corrective_action": {"type": "boolean", "default": true}
+      "entry_reminder_enabled": {
+        "type": "boolean",
+        "default": false
+      },
+      "entry_interval_hours": {
+        "type": "integer",
+        "default": 4
+      },
+      "critical_notification_enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "auto_corrective_action": {
+        "type": "boolean",
+        "default": true
+      }
     }
   }
 }
