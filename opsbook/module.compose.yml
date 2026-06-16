@@ -1,47 +1,37 @@
-# OpsBook – Digitales Betreiberhandbuch
-# Wird vom Deployment-Agent pro aktivierter Site gestartet.
-
 services:
   app:
-    image: ghcr.io/ex0th/guestops-module-opsbook:${MODULE_VERSION:-latest}
-    container_name: ${SERVICE_NAME}
-    restart: unless-stopped
-    networks:
-      - guestops-net
-    expose:
-      - "8000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: guestops-module-opsbook:latest
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${OPSBOOK_DB_USER}:${OPSBOOK_DB_PASSWORD}@${DB_HOST}:5432/${OPSBOOK_DB_NAME}
+      DATABASE_URL_ADMIN: postgresql+asyncpg://${OPSBOOK_DB_ADMIN_USER}:${OPSBOOK_DB_ADMIN_PASSWORD}@${DB_HOST}:5432/${OPSBOOK_DB_NAME}
+      SITE_SLUG: ${SITE_SLUG}
+      SITE_ID: ${SITE_ID}
+      CORE_JWKS_URL: ${CORE_JWKS_URL}
+      DOCUMENTS_PATH: /data/documents
     volumes:
       - opsbook_documents_${SITE_SLUG}:/data/documents
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      DATABASE_URL_ADMIN: ${DATABASE_URL_ADMIN:-}
-      SITE_ID: ${SITE_ID}
-      SITE_SLUG: ${SITE_SLUG}
-      GUESTOPS_CORE_URL: http://backend:8000
-      GUESTOPS_AGENT_TOKEN: ${GUESTOPS_AGENT_TOKEN}
-      MODULE_VERSION: ${MODULE_VERSION:-latest}
-      DOCUMENTS_PATH: /data/documents
+    expose:
+      - "8000"
+    networks:
+      - ${GUESTOPS_NETWORK}
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/opsbook`)"
-      - "traefik.http.routers.${SERVICE_NAME}.priority=10"
-      - "traefik.http.middlewares.${SERVICE_NAME}-strip.stripprefix.prefixes=/sites/${SITE_SLUG}/modules/opsbook"
-      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.regex=^(https?://[^/]+/sites/${SITE_SLUG}/modules/opsbook)$$"
-      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.replacement=$${1}/"
-      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.permanent=false"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-slash,${SERVICE_NAME}-strip"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
+      - "traefik.http.routers.${SITE_SLUG}-opsbook.rule=Host(`${SITE_SLUG}.${BASE_DOMAIN}`) && PathPrefix(`/modules/opsbook`)"
+      - "traefik.http.routers.${SITE_SLUG}-opsbook.entrypoints=websecure"
+      - "traefik.http.routers.${SITE_SLUG}-opsbook.tls=true"
+      - "traefik.http.routers.${SITE_SLUG}-opsbook.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.${SITE_SLUG}-opsbook.middlewares=${SITE_SLUG}-opsbook-strip"
+      - "traefik.http.middlewares.${SITE_SLUG}-opsbook-strip.stripprefix.prefixes=/modules/opsbook"
+      - "traefik.http.services.${SITE_SLUG}-opsbook.loadbalancer.server.port=8000"
 
 volumes:
   opsbook_documents_${SITE_SLUG}:
+    name: opsbook_documents_${SITE_SLUG}
 
 networks:
-  guestops-net:
+  ${GUESTOPS_NETWORK}:
     external: true
-    name: ${GUESTOPS_NETWORK}
