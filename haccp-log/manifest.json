@@ -15,8 +15,8 @@
     "healthcheck_path": "/health"
   },
   "routes": {
-    "frontend_template": "/sites/{site_slug}/modules/haccp_log",
-    "api_template": "/api/sites/{site_slug}/modules/haccp_log"
+    "frontend_template": "/sites/{site_slug}/modules/haccp-log",
+    "api_template": "/api/sites/{site_slug}/modules/haccp-log"
   },
   "permissions": [
     "haccp_log.read",

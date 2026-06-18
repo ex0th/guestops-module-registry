@@ -1,6 +1,5 @@
-# Lost & Found – Module Compose
-# Wird vom Deployment-Agent pro aktivierter Site gestartet.
-# Der Compose-Projektname (-p) ist SERVICE_NAME, container_name ebenfalls.
+# GuestOps Lost & Found — per-site compose template
+# Wird vom Deployment-Agent mit den richtigen Env-Variablen gestartet.
 
 services:
   app:

@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     networks:
       - guestops-net
+    expose:
+      - "8000"
     volumes:
       - haccp_log_data:/data
     environment:
@@ -15,6 +17,16 @@ services:
       GUESTOPS_CORE_URL: http://backend:8000
       GUESTOPS_AGENT_TOKEN: ${GUESTOPS_AGENT_TOKEN}
       MODULE_VERSION: ${MODULE_VERSION:-latest}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/haccp-log`)"
+      - "traefik.http.routers.${SERVICE_NAME}.priority=10"
+      - "traefik.http.middlewares.${SERVICE_NAME}-strip.stripprefix.prefixes=/sites/${SITE_SLUG}/modules/haccp-log"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.regex=^(https?://[^/]+/sites/${SITE_SLUG}/modules/haccp-log)$$"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.replacement=$${1}/"
+      - "traefik.http.middlewares.${SERVICE_NAME}-slash.redirectregex.permanent=false"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-slash,${SERVICE_NAME}-strip"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s

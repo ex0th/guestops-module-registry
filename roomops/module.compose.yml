@@ -4,7 +4,7 @@
 
 services:
   app:
-    image: ghcr.io/ex0th/guestops-module-roomops:latest
+    image: ghcr.io/ex0th/guestops-module-roomops:${MODULE_VERSION:-latest}
     container_name: ${SERVICE_NAME}
     restart: unless-stopped
     networks:
