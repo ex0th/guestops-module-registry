@@ -1,7 +1,7 @@
 {
   "key": "haccp_log",
   "name": "HACCP Log",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vollständiges HACCP-Compliance-Modul: Temperatur-, Hygiene- und Lebensmittelsicherheitsprotokolle. Flexible Vorlagen, Grenzwertüberwachung, Korrektivmaßnahmen, Audit-Trail und Export.",
   "author": "smilch",
   "min_core_version": "0.1.0",
