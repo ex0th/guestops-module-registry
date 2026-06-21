@@ -1,13 +1,13 @@
 {
   "registry_version": "1",
-  "updated_at": "2026-06-16",
+  "updated_at": "2026-06-21",
   "modules": [
-    { "key": "itdoc",          "path": "itdoc",           "version": "0.5.2" },
-    { "key": "haccp_log",      "path": "haccp-log",        "version": "0.0.1" },
-    { "key": "opsbook",        "path": "opsbook",          "version": "0.1.0" },
+    { "key": "itdoc",          "path": "itdoc",           "version": "0.5.4" },
+    { "key": "haccp_log",      "path": "haccp-log",        "version": "0.0.3" },
+    { "key": "opsbook",        "path": "opsbook",          "version": "0.0.4" },
     { "key": "queuesync",      "path": "queuesync",        "version": "1.0.0" },
     { "key": "roomops",        "path": "room-ops",         "version": "0.1.0" },
-    { "key": "shift_handover", "path": "shift-handover",   "version": "0.5.2" },
-    { "key": "lost_found",     "path": "lost-and-found",   "version": "0.5.2" }
+    { "key": "shift_handover", "path": "shift-handover",   "version": "0.5.4" },
+    { "key": "lost_found",     "path": "lost-and-found",   "version": "0.5.4" }
   ]
 }
