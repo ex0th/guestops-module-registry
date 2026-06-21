@@ -1,7 +1,7 @@
 {
   "key": "roomops",
   "name": "RoomOps",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Digitale Housekeeping- und Zimmerstatus-Plattform. Operative Zimmerstatus-Prozesse zwischen Housekeeping, Rezeption, Supervisoren und Management.",
   "author": "smilch",
   "min_core_version": "0.1.0",
