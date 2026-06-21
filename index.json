@@ -24,8 +24,8 @@
     },
     {
       "key": "roomops",
-      "path": "room-ops",
-      "version": "0.1.0"
+      "path": "roomops",
+      "version": "0.0.4"
     },
     {
       "key": "shift_handover",
