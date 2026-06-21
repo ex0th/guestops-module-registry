@@ -1,7 +1,7 @@
 {
   "key": "lost_found",
   "name": "Lost & Found",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Fundstückverwaltung für Hotels, Events und Gastro. Foto-Erfassung, QR-Etiketten, Gast-Verlustmeldungen, DSGVO-konforme Aufbewahrungsfristen.",
   "author": "smilch",
   "min_core_version": "0.1.0",
