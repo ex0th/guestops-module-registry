@@ -1,7 +1,7 @@
 {
   "key": "opsbook",
   "name": "OpsBook",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Digitales Betreiberhandbuch für kleine Unternehmen. Zentrale Dokumentations- und Betriebsplattform für Standorte, Ansprechpartner, IT-Infrastruktur, Verträge, Notfallpläne und Dokumente.",
   "author": "smilch",
   "min_core_version": "0.1.0",
