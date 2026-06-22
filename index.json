@@ -30,7 +30,7 @@
     {
       "key": "shift_handover",
       "path": "shift-handover",
-      "version": "0.5.7"
+      "version": "0.5.8"
     },
     {
       "key": "lost_found",
