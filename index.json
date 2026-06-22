@@ -1,6 +1,6 @@
 {
   "registry_version": "1",
-  "updated_at": "2026-06-21",
+  "updated_at": "2026-06-22",
   "modules": [
     {
       "key": "itdoc",
@@ -20,7 +20,7 @@
     {
       "key": "queuesync",
       "path": "queuesync",
-      "version": "1.0.0"
+      "version": "0.0.1"
     },
     {
       "key": "roomops",

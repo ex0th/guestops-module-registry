@@ -1,6 +1,9 @@
+# QueueSync – Warteschlangen- und Rufverwaltung.
+# Wird vom Deployment-Agent pro aktivierter Site gestartet.
+
 services:
   app:
-    image: ghcr.io/ex0th/queuesync:${MODULE_VERSION:-latest}
+    image: ghcr.io/ex0th/guestops-module-queuesync:${MODULE_VERSION:-latest}
     container_name: ${SERVICE_NAME}
     restart: unless-stopped
     networks:
@@ -17,8 +20,10 @@ services:
       MODULE_VERSION: ${MODULE_VERSION:-latest}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/queuesync`) || PathPrefix(`/api/sites/${SITE_SLUG}/modules/queuesync`)"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=PathPrefix(`/sites/${SITE_SLUG}/modules/queuesync`)"
       - "traefik.http.routers.${SERVICE_NAME}.priority=10"
+      - "traefik.http.middlewares.${SERVICE_NAME}-strip.stripprefix.prefixes=/sites/${SITE_SLUG}/modules/queuesync"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=${SERVICE_NAME}-strip"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
