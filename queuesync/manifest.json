@@ -1,7 +1,7 @@
 {
   "key": "queuesync",
   "name": "QueueSync",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Warteschlangen- und Rufverwaltung für Gastronomie und Hotellerie.",
   "author": "smilch",
   "min_core_version": "0.1.0",
